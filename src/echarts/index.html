@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.3.3/echarts.common.js"></script>
+
+</head>
+
+<body>
+  <div id="main" style="height : 600px; width: 600px;"></div>
+</body>
+
+<script>
+
+  let myChat = echarts.init(document.getElementById('main'))
+
+  let option = {
+    title: {
+      text: '入门案例'
+    },
+    tooltip: {},
+    legend: {
+      data: ['销量']
+    },
+    xAxis: {
+      data: ['CSGO', 'LOL', '神界原罪2', '拉面', '烧烤', '牛肉',],
+
+    },
+    yAxis: {
+
+    },
+    series: [
+      {
+        name: '销量',
+        type: 'line',
+        data: [5, 20, 36, 22, 6, 8]
+      },
+      {
+        name: '销量',
+        type: 'line',
+        data: [51, 220, 336, 242, 56, 8]
+      },
+
+    ]
+  }
+  myChat.setOption(option)
+</script>
+
+</html>

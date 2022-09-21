@@ -15,10 +15,8 @@ yarn serve
 yarn build
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
+### vue-router@3.5.1
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### vuex@3.6.2
+
+### echarts@5.1.2
