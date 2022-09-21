@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+  </style>
+</head>
+
+<body>
+
+</body>
+<script>
+  let otherdata = {
+    legend: {
+      // 图例文字颜色
+      textStyle: {
+        color: '#333'
+      }
+    },
+    grid: {
+      left: '20%'
+    },
+    // 提示框
+    tooltip: {
+      trigger: 'axis'
+    },
+    xAxis: {
+      type: 'category', // 类目轴
+      axisLine: {
+        lineStyle: {
+          color: '#17b3a3'
+        }
+      },
+      axisLabel: {
+        interval: 0,
+        color: '#333'
+      }
+    },
+    yAxis: [
+      {
+        type: 'value',
+        axisLine: {
+          lineStyle: {
+            color: '#17b3a3'
+          }
+        }
+      }
+    ],
+  }
+  let tooltip = {
+    trigger: 'aaa'
+  }
+  const keyArrary = { ...otherdata, tooltip }
+  console.log(keyArrary)
+</script>
+
+</html>

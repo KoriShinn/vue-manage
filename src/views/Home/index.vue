@@ -59,24 +59,18 @@
         </div>
         <!-- 折线图 -->
         <el-card class="lineChat">
-          <div
-            style="height: 280px;"
-            ref="echarts"
-          ></div>
+          <Echart :chartDate="echarts.order" />
         </el-card>
         <!-- 柱状图和饼状图 -->
         <div class="graph">
           <el-card>
-            <div
-              style="height: 260px;"
-              ref="userEcharts"
-            ></div>
+            <Echart :chartDate="echarts.user" />
           </el-card>
           <el-card>
-            <div
-              style="height: 260px;"
-              ref="videoEcharts"
-            ></div>
+            <Echart
+              :chartDate="echarts.video"
+              :isAxis="false"
+            />
           </el-card>
         </div>
       </el-col>
@@ -86,9 +80,12 @@
 
 <script>
 import { getDate } from '@/api/data'
-import * as echarts from 'echarts'
+import Echart from '@/components/Echart.vue'
 export default {
   name: 'Home',
+  components: {
+    Echart
+  },
   created () {
   },
   data () {
@@ -142,11 +139,12 @@ export default {
           color: '#5ab1ef'
         }
       ],
-      // 右2折线图
-      orderData: [],
-      userData: [],
-      videoData: []
-
+      // 右2
+      echarts: {
+        order: {},
+        user: {},
+        video: {}
+      }
     }
   },
   mounted () {
@@ -156,7 +154,6 @@ export default {
         this.tableData = data.tableData
         // 折线图
         const order = data.orderData
-        const xDate = order.date
         const keyArray = Object.keys(order.data[0])
         const series = []
         keyArray.forEach(key => {
@@ -166,62 +163,16 @@ export default {
             type: 'line'
           })
         })
-        const option = {
-          tooltip: {
-            trigger: 'item'
-          },
-          xAxis: {
-            data: xDate
-          },
-          yAxis: {},
-          legend: {
-            data: keyArray
-          },
+        this.echarts.order = {
+          xData: order.date,
+          // 增强写法 series : series === series
           series
         }
-        const E = echarts.init(this.$refs.echarts)
-        E.setOption(option)
       }
       // 柱状图
       const user = data.userData
-      const userOption = {
-        legend: {
-          // 图例文字颜色
-          textStyle: {
-            color: '#333'
-          }
-        },
-        grid: {
-          left: '20%'
-        },
-        // 提示框
-        tooltip: {
-          trigger: 'axis'
-        },
-        xAxis: {
-          type: 'category', // 类目轴
-          data: user.map(item => item.date),
-          axisLine: {
-            lineStyle: {
-              color: '#17b3a3'
-            }
-          },
-          axisLabel: {
-            interval: 0,
-            color: '#333'
-          }
-        },
-        yAxis: [
-          {
-            type: 'value',
-            axisLine: {
-              lineStyle: {
-                color: '#17b3a3'
-              }
-            }
-          }
-        ],
-        color: ['#2ec7c9', '#b6a2de'],
+      this.echarts.user = {
+        xData: user.map(item => item.date),
         series: [
           {
             name: '新增用户',
@@ -235,15 +186,10 @@ export default {
           }
         ]
       }
-      const UserE = echarts.init(this.$refs.userEcharts)
-      UserE.setOption(userOption)
+
       // 饼状图
       const video = data.videoData
-      console.log(video)
-      const videoOption = {
-        tooltip: {
-          trigger: 'item'
-        },
+      this.echarts.video = {
         series: [
           {
             type: 'pie',
@@ -252,8 +198,6 @@ export default {
           }
         ]
       }
-      const ViedoE = echarts.init(this.$refs.videoEcharts)
-      ViedoE.setOption(videoOption)
     })
   },
   methods: {
