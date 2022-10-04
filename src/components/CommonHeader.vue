@@ -10,15 +10,21 @@
       <!-- 面包屑 -->
       <div class="header-crumb">
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
+          <el-breadcrumb-item
+            v-for="item in tabList"
+            :key="item.path"
+            :to="{ name: item.name }"
+          >{{item.label}}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
     </div>
     <!-- 头像 -->
     <div class="header-avatar">
       <el-dropdown size="mini">
-        <el-avatar :size="40" :src="avatar"></el-avatar>
+        <el-avatar
+          :size="40"
+          :src="avatar"
+        ></el-avatar>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>个人中心</el-dropdown-item>
           <el-dropdown-item>退出</el-dropdown-item>
@@ -30,17 +36,26 @@
 
 <script>
 import image from '@/assets/images/gitee.png'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
       avatar: image
     }
   },
-  created () {},
+  created () {
+  },
   methods: {
     collapseMenu () {
       this.$store.commit('COLLAPSEMENU')
     }
+
+  },
+  computed: {
+    ...mapState({
+      tabList: state => state.tab.tabList,
+      currentMenu: state => state.tab.currentMenu
+    })
   }
 }
 </script>
@@ -70,12 +85,21 @@ header {
   }
 }
 
-/deep/.el-breadcrumb__inner.is-link {
+// /deep/.el-breadcrumb__inner.is-link {
+//   color: red;
+// }
+// /deep/.el-breadcrumb__inner.is-link:hover {
+//   color: rgb(128, 91, 91);
+// }
+/deep/.el-breadcrumb__item:last-child .el-breadcrumb__inner {
   color: #fff;
 }
-// header .left .el-breadcrumb__inner a{
-//     color:#fff
-//   }
+/deep/.el-breadcrumb__inner.is-link {
+  color: #666;
+}
+/deep/.el-breadcrumb__inner.is-link:hover {
+  color: #fff;
+}
 .header-avatar {
   height: 40px;
 }

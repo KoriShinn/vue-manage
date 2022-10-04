@@ -7,6 +7,7 @@
       <el-header>
         <CommonHeader></CommonHeader>
       </el-header>
+      <CommonTag></CommonTag>
       <el-main>
         <router-view></router-view>
       </el-main>
@@ -17,11 +18,13 @@
 <script>
 import Commonaside from '@/components/CommonAside'
 import CommonHeader from '@/components/CommonHeader'
+import CommonTag from '@/components/CommonTag'
 export default {
   name: 'Main',
   components: {
     Commonaside,
-    CommonHeader
+    CommonHeader,
+    CommonTag
   },
   data () {
     return {}
@@ -33,8 +36,9 @@ export default {
 
 <style lang="less" scoped >
 .el-header {
-  background-color: #2a2b29;
+  background-color: #2d2d2d;
 }
 .el-main {
+  padding: 0 20px;
 }
 </style>

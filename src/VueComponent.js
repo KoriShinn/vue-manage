@@ -20,9 +20,27 @@ import {
   Col,
   Card,
   Table,
-  tableColumn
+  tableColumn,
+  Tag,
+  Input,
+  Dialog,
+  Form,
+  FormItem,
+  Option,
+  Select,
+  datePicker,
+  Pagination
 } from 'element-ui'
 
+Vue.use(Pagination)
+Vue.use(datePicker)
+Vue.use(Option)
+Vue.use(Select)
+Vue.use(FormItem)
+Vue.use(Form)
+Vue.use(Dialog)
+Vue.use(Input)
+Vue.use(Tag)
 Vue.use(tableColumn)
 Vue.use(Table)
 Vue.use(Card)

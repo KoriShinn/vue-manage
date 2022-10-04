@@ -22,13 +22,28 @@ const routes = [
         path: '/user',
         name: 'User',
         component: () => import('@/views/User')
+      },
+      {
+        path: '/page1',
+        name: 'Page1',
+        component: () => import('@/views/Other/PageOne')
+      },
+      {
+        path: '/page2',
+        name: 'Page2',
+        component: () => import('@/views/Other/PageTwo')
       }
     ]
   }
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history'
+})
+
+router.beforeEach((to, from, next) => {
+  next()
 })
 
 export default router

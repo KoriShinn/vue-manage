@@ -14,15 +14,16 @@ export default {
 </script>
 
 <style lang="less">
-  body,
-  html {
-    margin: 0;
-    padding: 0;
-  }
-  * {
-    font-weight: normal;
-  }
-  #app{
-    height: 100vh;
-  }
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background-color: #f3f3f3;
+}
+* {
+  font-weight: normal;
+}
+#app {
+  height: 100vh;
+}
 </style>

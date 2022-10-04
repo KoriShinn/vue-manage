@@ -215,7 +215,6 @@ export default {
 }
 .user {
   display: flex;
-
   img {
     width: 100px;
     height: 100px;
@@ -224,7 +223,7 @@ export default {
     max-height: 100%;
   }
   .user-info {
-    padding-left: 20px;
+    padding-left: 30px;
     display: flex;
     flex-flow: column;
     align-items: center;

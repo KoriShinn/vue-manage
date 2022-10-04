@@ -11,6 +11,7 @@
       :collapse="isCollapse"
     >
       <h3>{{ isCollapse ? '后台' : '通用后台管理系统' }}</h3>
+      <!-- 纯一级菜单渲染 -->
       <el-menu-item
         v-for="item in noChildren"
         :index="item.path + ''"
@@ -20,6 +21,7 @@
         <i :class="'el-icon-' + item.icon"></i>
         <span slot="title">{{ item.label }}</span>
       </el-menu-item>
+      <!-- 有子项的一级菜单渲染 -->
       <el-submenu
         v-for="item in hasChildren"
         :index="item.path + ''"
@@ -29,12 +31,19 @@
           <i :class="'el-icon-' + item.icon"></i>
           <span slot="title">{{ item.label }}</span>
         </template>
-        <el-menu-item-group v-for="child in item.children" :key="child.path">
+        <!-- 二级菜单渲染 -->
+        <el-menu-item-group
+          v-for="child in item.children"
+          :key="child.path"
+        >
           <span slot="title">{{ child.label }}</span>
-          <el-menu-item :index="child.path + ''">
-            <i :class="'el-icon-' + child.icon"></i>
-            {{ child.name }}</el-menu-item
+          <el-menu-item
+            :index="child.path + ''"
+            @click="clickSecMenu(child)"
           >
+            <i :class="'el-icon-' + child.icon"></i>
+            {{ child.name }}
+          </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
@@ -102,7 +111,15 @@ export default {
     clickMenu (item) {
       this.$router.push({
         name: item.name
+      }).catch(() => console.log('repeat jump'))
+      this.$store.commit('SELECTMENU', item)
+    },
+    // 二级菜单点击
+    clickSecMenu (child) {
+      this.$router.push({
+        name: child.name
       })
+      this.$store.commit('SELECTMENU', child)
     }
   },
   computed: {
